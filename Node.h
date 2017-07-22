@@ -12,6 +12,8 @@ private:
     Node * nextNode = nullptr;
 
 public:
+
+
     T getDataNode() const {
         return dataNode;
     }
@@ -28,17 +30,13 @@ public:
         Node::nextNode = nextNode;
     }
 
-    Node() {
-        //
-    }
+    Node() = default;
 
     Node(T dataNode, Node *nextNode) : dataNode(dataNode), nextNode(nextNode) {
 
     }
 
-    virtual ~Node() {
-        //
-    }
+    virtual ~Node() = default;
 };
 
 

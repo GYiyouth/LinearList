@@ -3,5 +3,5 @@ project(linearList)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Node.cpp Node.h LinearList.cpp LinearList.h SimpleLinearList.h)
+set(SOURCE_FILES main.cpp Node.h LinearList.cpp LinearList.h SimpleLinearList.h)
 add_executable(linearList ${SOURCE_FILES})
