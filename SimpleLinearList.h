@@ -8,7 +8,6 @@
 #include "LinearList.h"
 template <class T>
 class SimpleLinearList : public LinearList<T>{
-
 private:
     int size = 0; // 变量和方法名不能相同
 public:
