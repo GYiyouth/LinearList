@@ -5,7 +5,9 @@
 #ifndef LINEARLIST_SIMPLELINEARLIST_H
 #define LINEARLIST_SIMPLELINEARLIST_H
 
+
 #include "LinearList.h"
+
 template <class T>
 class SimpleLinearList : public LinearList<T>{
 private:
@@ -29,6 +31,8 @@ public:
 
     bool add(Node<T> *node) override;
 };
+
+
 
 
 template <class T>
