@@ -3,7 +3,35 @@
 #include "LinearList.h"
 #include "SimpleLinearList.h"
 using namespace std;
+
+
+//交换
+template <class T>
+void changeLength(T * & a, const int oldLength, const int newLength){
+    if (newLength < 0){
+        throw exception();
+    }
+    T* temp = new T[newLength];
+    int number = min(oldLength, newLength);
+    copy(a, a + number, temp);
+    delete []a;
+    a = temp;
+}
+//对于数组指针进行测试
+int test(){
+    int * arrs = new int[5];
+    for (int i = 0; i < 5; ++i) {
+        arrs[i] = i;
+    }
+    changeLength(arrs, 5, 3);
+    // 每当指针移动一个位置，就会指向下一个元素
+    for (int j = 0; j < 6; ++j) {
+        cout << * (arrs + j) << endl;
+    }
+}
+
 int main() {
+    test();
     LinearList<int>* linearList = new SimpleLinearList<int>();
     //新建10个节点，添加到单链表中
     for (int i = 0; i < 10 ; i ++ ){
@@ -16,5 +44,8 @@ int main() {
         cout << tail->getDataNode() << endl;
         linearList->remove(tail);
     }
+
+
+
     return 0;
 }
