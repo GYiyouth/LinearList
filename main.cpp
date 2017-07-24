@@ -29,27 +29,32 @@ int test(){
         cout << * (arrs + j) << endl;
     }
 }
-
+SimpleLinearList<int> getSimpleLinearList(void);
+SimpleLinearList<int>* getSimpleLinearListPoint(void);
 int test1();
 
 int main() {
 
-    LinearList<int>* linearList = new SimpleLinearList<int>();
-    //新建10个节点，添加到单链表中
-    for (int i = 0; i < 10 ; i ++ ){
-        auto node = new Node<int>(i, nullptr);
-        linearList->add(node);
+
+    //TODO 这里不能用抽象类分配变量
+    SimpleLinearList<int> list = getSimpleLinearList();
+    Node<int> * node = list.getHead();
+    while (node != nullptr){
+        cout << node->getDataNode() << endl;
+        node = node->getNextNode();
     }
-
-
-    //遍历所有节点并删除
-    while ( (linearList->empty() ) != true ){
-        Node<int> * tail = linearList->getNode( linearList->getSize());
-        cout << tail->getDataNode() << endl;
-        linearList->remove(tail);
-    }
-
-    cout << (nullptr == nullptr) << endl;
+//    这样会崩溃，因为指向的内存区域已经被收回了
+//    LinearList<int> * listPoint = getSimpleLinearListPoint();
+//    Node<int> * node1 = listPoint->getHead();
+//    while (node1 != nullptr){
+//        cout << node->getDataNode() << endl;
+//        node = node->getNextNode();
+//    }
+    Node<int> * temp;
+    temp = new Node<int>(); //TODO 这里我甚至不能输入常数进行构造，如果形参为引用类型
+    temp->setDataNode(10);
+    list.add( temp );
+    cout << list.getSize() << list.empty() ;
 
     return 0;
 }

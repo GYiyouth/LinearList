@@ -46,6 +46,7 @@ public:
         this->dataNode = dataNode;
     };
 
+
     //析构函数
     virtual ~Node() = default;
 };

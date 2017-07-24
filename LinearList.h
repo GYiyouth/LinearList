@@ -29,8 +29,10 @@ public:
     virtual bool remove(int index) = 0;
     //在尾部添加一个节点
     virtual bool add(Node<T> *node) = 0;
+    //判断是否有环路
+    virtual bool circleJudge() const = 0;
 
-    virtual Node<T>* circleJudge() const = 0;
+    virtual Node<T> * getTailNode() const = 0;
 };
 
 
