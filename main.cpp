@@ -55,6 +55,6 @@ int main() {
     temp->setDataNode(10);
     list.add( temp );
     cout << list.getSize() << list.empty() ;
-
+    //TODO 7356d09(完善了环路出线的情况的考虑，完成了简单单链表的测试。 明天测试环路的情况，以及，单链表变成循环链表时的情况。)
     return 0;
 }
