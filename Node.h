@@ -20,11 +20,12 @@ private:
     T dataNode;
     Node * nextNode = nullptr;
     //设置私有，只允许链表访问
+
+
+public:
     void setNextNode(Node *nextNode) {
         Node::nextNode = nextNode;
     }
-
-public:
 
     //友元类，别处不可再访问setNextNode操作
     friend class SimpleLinearList<T>;

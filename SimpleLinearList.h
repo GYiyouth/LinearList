@@ -136,6 +136,7 @@ bool SimpleLinearList<T>::remove(Node<T> *node) {
         //翻转
         forwardFlag = ! forwardFlag;
     }
+    return false;
 }
 
 //移除指定位置上的节点
@@ -216,13 +217,9 @@ bool SimpleLinearList<T>::circleJudge() const {
     //出口之一，下一个节点为 nullptr
     while(fastNode->getNextNode() != nullptr){
         fastNode = fastNode->getNextNode();
-        //出口之二，2个指针相逢了
-        if (fastNode == slowNode){
-            return true;
-        } else
         if (forwardFlag){
             slowNode = slowNode->getNextNode();
-            if (fastNode == slowNode){ //出口之二，2个指针相逢了
+            if (fastNode == slowNode){ //出口，2个指针相逢了
                 return true;
             }
         }
@@ -233,7 +230,7 @@ bool SimpleLinearList<T>::circleJudge() const {
 }
 
 
-//获取尾节点，如果存在环路，则返回成环的那个节点
+//获取尾节点，如果存在环路，则返回快慢相遇的节点
 template <class T>
 Node<T> *SimpleLinearList<T>::getTailNode() const {
     Node<T> * fastNode = getHead();
@@ -245,14 +242,16 @@ Node<T> *SimpleLinearList<T>::getTailNode() const {
     //从头至尾遍历
     while(fastNode->getNextNode() != nullptr){
         fastNode = fastNode->getNextNode();
-        if (fastNode == slowNode){
-            //出现环路
-            return getCircleTailNode(getHead(), fastNode);
-        }
+
+//        if (fastNode == slowNode){ 这里其实不适合判断2次
+//            //出现环路
+//            return getCircleTailNode(getHead(), fastNode);
+//        }
         if (forwardFlag){
             slowNode = slowNode->getNextNode();
             if (fastNode == slowNode){
-                //出现环路，之所以检查2次，是因为可能出现，快节点领先慢节点一圈，二者同时入环
+                //出现环路
+                //只在这里检查，因为这样才满足 快节点比 慢节点走的步子 多一倍 的调节，方便后面调试
                 return getCircleTailNode(getHead(), fastNode);
             }
         }

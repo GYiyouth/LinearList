@@ -28,9 +28,17 @@ int test(){
     for (int j = 0; j < 6; ++j) {
         cout << * (arrs + j) << endl;
     }
+    return 0;
 }
-SimpleLinearList<int> getSimpleLinearList(void);
-SimpleLinearList<int>* getSimpleLinearListPoint(void);
+SimpleLinearList<int> getSimpleLinearList(void); // 获取无环单链表
+SimpleLinearList<int>* getSimpleLinearListPoint(void);// 获取无环单链表
+SimpleLinearList<int> getCircleLinearList(void); // 获取有环单链表
+template <class T>
+Node<T> * getCircleEnterNode(Node<T> * head, Node<T>* encounter);
+template <class T>
+Node<T> * getCircleTailNode(Node<T> * head, Node<T>* encounter);
+template <class T>
+Node<T > * getCircleNode(Node<T> *head, Node<T> *encounter);
 int test1();
 
 int main() {
@@ -55,6 +63,26 @@ int main() {
     temp->setDataNode(10);
     list.add( temp );
     cout << list.getSize() << list.empty() ;
+    cout << endl << endl <<"环路测试" << endl << endl;
     //TODO 7356d09(完善了环路出线的情况的考虑，完成了简单单链表的测试。 明天测试环路的情况，以及，单链表变成循环链表时的情况。)
+    SimpleLinearList<int> cirList = getCircleLinearList();
+    Node<int>* node1 = cirList.getHead();
+    for (int i = 0; i < 20; ++i) {
+        cout<<node1->getDataNode()<< endl;
+        node1 = node1->getNextNode();
+    }
+    //TODO 这里判断成环能不能用hashMap来做呢？
+    int size = cirList.getSize();
+    cout << "环路的size是" << size << endl;
+
+    Node<int>* encounter = cirList.getTailNode();
+    Node<int>* nodeC0 = getCircleNode(cirList.getHead(), encounter); //FIXME
+    cout << "环节点是" << nodeC0->getDataNode() << endl;
+    Node<int>* nodeC_1 = getCircleEnterNode(cirList.getHead(), encounter);
+    cout << "入环节点是" << nodeC_1->getDataNode() << endl;
+    Node<int>* nodeC1 = getCircleTailNode(cirList.getHead(), encounter);
+
+    cout << "环尾节点是" << nodeC1->getDataNode() << endl;
+
     return 0;
 }
