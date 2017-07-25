@@ -31,7 +31,7 @@ public:
     virtual bool add(Node<T> *node) = 0;
     //判断是否有环路
     virtual bool circleJudge() const = 0;
-
+    //获取尾节点，如果有环路，则是快慢指针相遇的节点
     virtual Node<T> * getTailNode() const = 0;
 };
 

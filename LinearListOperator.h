@@ -24,10 +24,11 @@
  * 再退y步则是到了环的入口点。
  * 也即，当p1移动x步第一次到达环的入口点时，p2也恰好到达了该入口点。
  * */
+//已知单链表中有一个环路，获取它的环节点
 template <class T>
 Node<T> * getCircleNode(Node<T> *head, Node<T> *encounter){
     Node <T>*p1 = head, *p2 = encounter;
-    while(p1 != p2 && p1 != p2->getNextNode())
+    while(p1 != p2)
     {
         p1 = p1->getNextNode();
         p2 = p2->getNextNode();
@@ -35,7 +36,7 @@ Node<T> * getCircleNode(Node<T> *head, Node<T> *encounter){
     return p1;
 }
 
-//获取入环节点的前一个节点
+//获取入环节点
 template <class T>
 Node<T> * getCircleEnterNode(Node<T> * head, Node<T>* encounter){
     Node <T> *p1 = head, *p2 = encounter;
@@ -51,7 +52,7 @@ Node<T> * getCircleEnterNode(Node<T> * head, Node<T>* encounter){
     return p1;
 }
 
-//获取环尾节点 1 2 3 4 5
+//获取环尾节点
 template <class T>
 Node<T> * getCircleTailNode(Node<T> * head, Node<T>* encounter){
     Node  <T>*p1 = head, *p2 = encounter;

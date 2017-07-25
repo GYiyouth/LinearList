@@ -12,28 +12,17 @@ template <class T>
 class SimpleLinearList : public LinearList<T>{
 private:
     // 变量和方法名不能相同
-
 public:
     Node<T> *getHead() const override;
-
     void setHead(Node<T> *head) override;
-
     bool empty() const override;
-
     int getSize() const override;
-
     Node<T> *getNode(int index) const override;
-
     bool insert(int index, Node<T> *node) override;
-
     bool remove(Node<T> *node) override;
-
     bool remove(int index) override;
-
     bool add(Node<T> *node) override;
-
     bool circleJudge() const override;
-
     Node<T> *getTailNode() const override;
 };
 
@@ -63,7 +52,6 @@ int SimpleLinearList<T>::getSize() const {
     Node<T> * tail = getTailNode();
     int size = 0;
     Node<T> * head = getHead();
-    //不存在环路的情况
     if (tail->getNextNode() != nullptr){
         //存在环路，此时tail是相遇的节点
         //获取真正的尾节点
@@ -80,22 +68,19 @@ int SimpleLinearList<T>::getSize() const {
 template <class T>
 Node<T> *SimpleLinearList<T>::getNode(const int index) const {
     if (index >= 0){
-        Node<T> * node = nullptr;
-        node = this->getHead();
-        if(index == 0){
-            return node;
-        }
+        Node<T> * node = this->getHead();
         int i = 0;
-        while (i < index){
+        while (i < index){ // 遍历
             if (node->getNextNode() != nullptr) {
                 i++;
                 node = node->getNextNode();
             } else{
+                // index > size ，返回空
                 return nullptr;
             }
         }
         return node;
-    } else{
+    } else{ // 位置非法
         return nullptr;
     }
 }
@@ -117,11 +102,13 @@ bool SimpleLinearList<T>::insert(int index, Node<T> *node) {
 template <class T>
 bool SimpleLinearList<T>::remove(Node<T> *node) {
     Node<T> * targetParent = this->getHead();
+    //如果删除的是头结点
     if (targetParent == node){
         setHead(node->getNextNode());
         delete targetParent;
         return true;
     }
+    //删除普通节点，则遍历整个链表，直到找到这个节点，或者遍历到尾部，或者发现环路出现
     Node<T> * slowNode = getHead(); // 考虑环路 且 节点不存在的情况
     bool forwardFlag = false;
     while (targetParent != nullptr){
@@ -130,12 +117,9 @@ bool SimpleLinearList<T>::remove(Node<T> *node) {
             return true;
         }
         targetParent = targetParent->getNextNode();
-        if (targetParent == slowNode){ // 环路出现，已遍历一圈
-            return false;
-        }
         if (forwardFlag){ // 慢指针该走了
             slowNode = slowNode->getNextNode();
-            if (targetParent == slowNode){ // 环路出现，以遍历一圈
+            if (targetParent == slowNode){ // 环路出现，已遍历一圈，依然没有发现节点，说明不存在
                 return false;
             }
         }
@@ -152,21 +136,22 @@ bool SimpleLinearList<T>::remove(int index) {
     if (index < 0 ){
         return false;
     }
-
+    //头结点判断
     Node<T> * targetParent = getHead();
     if (targetParent == nullptr) { // 如果头结点也不存在
         return false;
     }
-
-    if (index == 0){ // 删除头结点的特殊情况
+    // 删除头结点的特殊情况
+    if (index == 0){
         setHead(targetParent->getNextNode());
         //delete是删除指针指向的对象，让其释放内存。
         delete(targetParent);
         //指针中的地址不变，所以一般在delete指针后，要将该指针的值赋值NULL（置空）。
+        //其实这里并没有必要，因为立马就返回了。这个变量也会被销毁
         targetParent = nullptr;
         return true;
     }
-
+    //根据index遍历整个链表
     for(int i = 1 ; i < index ; i++){
         if (targetParent->getNextNode() == nullptr){
             //删除的位置不存在
@@ -174,7 +159,7 @@ bool SimpleLinearList<T>::remove(int index) {
         }
         targetParent = targetParent->getNextNode();
     }
-
+    //找到了要删除的节点
     Node<T> * target = targetParent->getNextNode();
     targetParent->setNextNode(target->getNextNode());
     //函数调用后会出现什么？
@@ -191,6 +176,7 @@ bool SimpleLinearList<T>::add(Node<T> *node) {
     if (node == nullptr){
         return false;
     }
+    //成环标志
     bool cirFlag = circleJudge();
     if (getHead() == nullptr){ // 空链表
         setHead(node);
@@ -206,7 +192,6 @@ bool SimpleLinearList<T>::add(Node<T> *node) {
         tail->setNextNode(node);
         return true;
     }
-
 }
 
 //判断该链条是否存在环路
@@ -223,6 +208,7 @@ bool SimpleLinearList<T>::circleJudge() const {
     //出口之一，下一个节点为 nullptr
     while(fastNode->getNextNode() != nullptr){
         fastNode = fastNode->getNextNode();
+        //其实这里也可以做判断，但是不利于后面的算法
         if (forwardFlag){
             slowNode = slowNode->getNextNode();
             if (fastNode == slowNode){ //出口，2个指针相逢了
@@ -248,11 +234,6 @@ Node<T> *SimpleLinearList<T>::getTailNode() const {
     //从头至尾遍历
     while(fastNode->getNextNode() != nullptr){
         fastNode = fastNode->getNextNode();
-
-//        if (fastNode == slowNode){ 这里其实不适合判断2次
-//            //出现环路
-//            return getCircleTailNode(getHead(), fastNode);
-//        }
         if (forwardFlag){
             slowNode = slowNode->getNextNode();
             if (fastNode == slowNode){
@@ -263,7 +244,7 @@ Node<T> *SimpleLinearList<T>::getTailNode() const {
         }
         forwardFlag = !forwardFlag;
     }
-    //无环路出线
+    //无环路，返回tail
     return fastNode;
 }
 
