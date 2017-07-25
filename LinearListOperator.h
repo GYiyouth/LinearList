@@ -27,7 +27,7 @@
 template <class T>
 Node<T> * getCircleNode(Node<T> *head, Node<T> *encounter){
     Node <T>*p1 = head, *p2 = encounter;
-    while(p1 != p2)
+    while(p1 != p2 && p1 != p2->getNextNode())
     {
         p1 = p1->getNextNode();
         p2 = p2->getNextNode();

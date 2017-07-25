@@ -7,6 +7,8 @@
 #include "SimpleLinearList.h"
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
+
 using namespace std;
 
 //获取一个简单的无环单链表

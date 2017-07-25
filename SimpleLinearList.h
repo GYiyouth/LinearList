@@ -63,6 +63,12 @@ int SimpleLinearList<T>::getSize() const {
     Node<T> * tail = getTailNode();
     int size = 0;
     Node<T> * head = getHead();
+    //不存在环路的情况
+    if (tail->getNextNode() != nullptr){
+        //存在环路，此时tail是相遇的节点
+        //获取真正的尾节点
+        tail = getCircleTailNode(head, tail);
+    }
     while(head != tail){
         size ++ ;
         head = head->getNextNode();
@@ -252,7 +258,7 @@ Node<T> *SimpleLinearList<T>::getTailNode() const {
             if (fastNode == slowNode){
                 //出现环路
                 //只在这里检查，因为这样才满足 快节点比 慢节点走的步子 多一倍 的调节，方便后面调试
-                return getCircleTailNode(getHead(), fastNode);
+                return slowNode;
             }
         }
         forwardFlag = !forwardFlag;

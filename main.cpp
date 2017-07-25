@@ -5,7 +5,7 @@
 using namespace std;
 
 
-//äº¤æ¢
+//½»»»
 template <class T>
 void changeLength(T * & a, const int oldLength, const int newLength){
     if (newLength < 0){
@@ -17,22 +17,22 @@ void changeLength(T * & a, const int oldLength, const int newLength){
     delete []a;
     a = temp;
 }
-//å¯¹äºæ•°ç»„æŒ‡é’ˆè¿›è¡Œæµ‹è¯•
+//¶ÔÓÚÊı×éÖ¸Õë½øĞĞ²âÊÔ
 int test(){
     int * arrs = new int[5];
     for (int i = 0; i < 5; ++i) {
         arrs[i] = i;
     }
     changeLength(arrs, 5, 3);
-    // æ¯å½“æŒ‡é’ˆç§»åŠ¨ä¸€ä¸ªä½ç½®ï¼Œå°±ä¼šæŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
+    // Ã¿µ±Ö¸ÕëÒÆ¶¯Ò»¸öÎ»ÖÃ£¬¾Í»áÖ¸ÏòÏÂÒ»¸öÔªËØ
     for (int j = 0; j < 6; ++j) {
         cout << * (arrs + j) << endl;
     }
     return 0;
 }
-SimpleLinearList<int> getSimpleLinearList(void); // è·å–æ— ç¯å•é“¾è¡¨
-SimpleLinearList<int>* getSimpleLinearListPoint(void);// è·å–æ— ç¯å•é“¾è¡¨
-SimpleLinearList<int> getCircleLinearList(void); // è·å–æœ‰ç¯å•é“¾è¡¨
+SimpleLinearList<int> getSimpleLinearList(void); // »ñÈ¡ÎŞ»·µ¥Á´±í
+SimpleLinearList<int>* getSimpleLinearListPoint(void);// »ñÈ¡ÎŞ»·µ¥Á´±í
+SimpleLinearList<int> getCircleLinearList(void); // »ñÈ¡ÓĞ»·µ¥Á´±í
 template <class T>
 Node<T> * getCircleEnterNode(Node<T> * head, Node<T>* encounter);
 template <class T>
@@ -44,14 +44,14 @@ int test1();
 int main() {
 
 
-    //TODO è¿™é‡Œä¸èƒ½ç”¨æŠ½è±¡ç±»åˆ†é…å˜é‡
+    //TODO ÕâÀï²»ÄÜÓÃ³éÏóÀà·ÖÅä±äÁ¿
     SimpleLinearList<int> list = getSimpleLinearList();
     Node<int> * node = list.getHead();
     while (node != nullptr){
         cout << node->getDataNode() << endl;
         node = node->getNextNode();
     }
-//    è¿™æ ·ä¼šå´©æºƒï¼Œå› ä¸ºæŒ‡å‘çš„å†…å­˜åŒºåŸŸå·²ç»è¢«æ”¶å›äº†
+//    ÕâÑù»á±ÀÀ££¬ÒòÎªÖ¸ÏòµÄÄÚ´æÇøÓòÒÑ¾­±»ÊÕ»ØÁË
 //    LinearList<int> * listPoint = getSimpleLinearListPoint();
 //    Node<int> * node1 = listPoint->getHead();
 //    while (node1 != nullptr){
@@ -59,30 +59,60 @@ int main() {
 //        node = node->getNextNode();
 //    }
     Node<int> * temp;
-    temp = new Node<int>(); //TODO è¿™é‡Œæˆ‘ç”šè‡³ä¸èƒ½è¾“å…¥å¸¸æ•°è¿›è¡Œæ„é€ ï¼Œå¦‚æœå½¢å‚ä¸ºå¼•ç”¨ç±»å‹
+    temp = new Node<int>(); //TODO ÕâÀïÎÒÉõÖÁ²»ÄÜÊäÈë³£Êı½øĞĞ¹¹Ôì£¬Èç¹ûĞÎ²ÎÎªÒıÓÃÀàĞÍ
     temp->setDataNode(10);
     list.add( temp );
     cout << list.getSize() << list.empty() ;
-    cout << endl << endl <<"ç¯è·¯æµ‹è¯•" << endl << endl;
-    //TODO 7356d09(å®Œå–„äº†ç¯è·¯å‡ºçº¿çš„æƒ…å†µçš„è€ƒè™‘ï¼Œå®Œæˆäº†ç®€å•å•é“¾è¡¨çš„æµ‹è¯•ã€‚ æ˜å¤©æµ‹è¯•ç¯è·¯çš„æƒ…å†µï¼Œä»¥åŠï¼Œå•é“¾è¡¨å˜æˆå¾ªç¯é“¾è¡¨æ—¶çš„æƒ…å†µã€‚)
+    cout << endl << endl <<"»·Â·²âÊÔ" << endl << endl;
+    //TODO 7356d09(ÍêÉÆÁË»·Â·³öÏßµÄÇé¿öµÄ¿¼ÂÇ£¬Íê³ÉÁË¼òµ¥µ¥Á´±íµÄ²âÊÔ¡£ Ã÷Ìì²âÊÔ»·Â·µÄÇé¿ö£¬ÒÔ¼°£¬µ¥Á´±í±ä³ÉÑ­»·Á´±íÊ±µÄÇé¿ö¡£)
     SimpleLinearList<int> cirList = getCircleLinearList();
     Node<int>* node1 = cirList.getHead();
     for (int i = 0; i < 20; ++i) {
         cout<<node1->getDataNode()<< endl;
         node1 = node1->getNextNode();
     }
-    //TODO è¿™é‡Œåˆ¤æ–­æˆç¯èƒ½ä¸èƒ½ç”¨hashMapæ¥åšå‘¢ï¼Ÿ
+    //TODO ÕâÀïÅĞ¶Ï³É»·ÄÜ²»ÄÜÓÃhashMapÀ´×öÄØ£¿
     int size = cirList.getSize();
-    cout << "ç¯è·¯çš„sizeæ˜¯" << size << endl;
+    cout << "»·Â·µÄsizeÊÇ" << size << endl;
 
     Node<int>* encounter = cirList.getTailNode();
     Node<int>* nodeC0 = getCircleNode(cirList.getHead(), encounter); //FIXME
-    cout << "ç¯èŠ‚ç‚¹æ˜¯" << nodeC0->getDataNode() << endl;
+    cout << "»·½ÚµãÊÇ" << nodeC0->getDataNode() << endl;
     Node<int>* nodeC_1 = getCircleEnterNode(cirList.getHead(), encounter);
-    cout << "å…¥ç¯èŠ‚ç‚¹æ˜¯" << nodeC_1->getDataNode() << endl;
+    cout << "Èë»·½ÚµãÊÇ" << nodeC_1->getDataNode() << endl;
     Node<int>* nodeC1 = getCircleTailNode(cirList.getHead(), encounter);
 
-    cout << "ç¯å°¾èŠ‚ç‚¹æ˜¯" << nodeC1->getDataNode() << endl;
+    cout << "»·Î²½ÚµãÊÇ" << nodeC1->getDataNode() << endl;
+    //FIXME Ñ­»·Á´±íÊ±ÎŞ·¨Í¨¹ı
+
+    cout << "»ñÈ¡Ö¸¶¨Î»ÖÃÉÏµÄ½ÚµãTest" << endl;
+    cout << cirList.getNode(0)->getDataNode() << endl;
+    cout << cirList.getNode(6)->getDataNode() << endl;
+    cout << cirList.getNode(16)->getDataNode() << endl;
+    cout << cirList.getNode(17)->getDataNode() << endl;
+    cout << "Ö¸¶¨Î»ÖÃ²åÈë½Úµã²âÊÔTest" << endl;
+    Node<int>* node2Inst1 = new Node<int>();
+    node2Inst1->setDataNode(2);
+    Node<int>* node2Inst2 = new Node<int>();
+    node2Inst2->setDataNode(12);
+    cirList.insert(9, node2Inst2);
+    cirList.insert(0, node2Inst1);
+
+    node1 = cirList.getHead();
+    for (int i = 0; i < 20; ++i) {
+        cout<<node1->getDataNode()<< endl;
+        node1 = node1->getNextNode();
+    }
+    cout << "Ö¸¶¨Î»ÖÃÉ¾³ı½Úµã²âÊÔTest" << endl;
+    cirList.remove(11);
+    node1 = cirList.getHead();
+    for (int i = 0; i < 20; ++i) {
+        cout<<node1->getDataNode()<< endl;
+        node1 = node1->getNextNode();
+    }
+    cout << "³É»·²âÊÔ" << endl;
+    cout << list.circleJudge() << endl;
+    cout << cirList.circleJudge() << endl;
 
     return 0;
 }
