@@ -8,8 +8,6 @@
 #include "Node.h"
 template <class T>
 class LinearList {
-protected:
-    Node<T> * head = nullptr;
 public:
     //获取头结点
     virtual Node<T> *getHead() const = 0;

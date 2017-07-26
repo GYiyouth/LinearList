@@ -11,6 +11,7 @@
 template <class T>
 class SimpleLinearList : public LinearList<T>{
 private:
+    Node<T> * head = nullptr;
     // 变量和方法名不能相同
 public:
     Node<T> *getHead() const override;
