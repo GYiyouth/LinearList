@@ -9,39 +9,42 @@
 /**
  * A node with double pointers.
  * With the two pointers we can get two nodes which before or after itself.
+ * This kind of relation leads to Nesting Strategy to allocate memory
+ * //TODO
+ * DNode{Node, before}
+ * Not DNode{next, date, before}
  */
 
 template <class T>
-class DNode:private Node<T>{
+class DNode: protected Node<T>{
 private:
     DNode<T> * before = nullptr;
-    T dateNode;
-    DNode<T> * after = nullptr;
 protected:
 public:
-    DNode *getBefore() const {
+    DNode<T> *getBefore() const {
         return before;
     }
 
     void setBefore(DNode *before) {
-        DNode::before = before;
+        DNode<T>::before = before;
     }
 
-    T getDateNode() const {
-        return dateNode;
+    void setNextNode(DNode *nextNode) {
+        Node<T>::setNextNode(nextNode);
     }
 
-    void setDateNode(T dateNode) {
-        DNode::dateNode = dateNode;
+    T getDataNode() const {
+        return Node<T>::getDataNode();
     }
 
-    DNode *getAfter() const {
-        return after;
+    void setDataNode(T dataNode) {
+        Node<T>::setDataNode(dataNode);
     }
 
-    void setAfter(DNode *after) {
-        DNode::after = after;
+    DNode<T> *getNextNode() const {
+        return (DNode<T>*)Node<T>::getNextNode();
     }
+
 };
 
 

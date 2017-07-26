@@ -23,19 +23,22 @@ private:
 
 
 public:
-    void setNextNode(Node *nextNode) {
+    virtual void setNextNode(Node *nextNode) {
         Node::nextNode = nextNode;
     }
 
     //友元类，别处不可再访问setNextNode操作
     friend class SimpleLinearList<T>;
-    T getDataNode() const {
+
+    virtual T getDataNode() const {
         return dataNode;
     }
-    void setDataNode(T dataNode) {
+
+    virtual void setDataNode(T dataNode) {
         Node::dataNode = dataNode;
     }
-    Node *getNextNode() const {
+
+    virtual Node *getNextNode() const {
         return nextNode;
     }
 
