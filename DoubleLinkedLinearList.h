@@ -51,6 +51,10 @@ DNode<T> *DoubleLinkedLinearList<T>::getHead() const {
 }
 template <class T>
 void DoubleLinkedLinearList<T>::setHead(DNode<T> *head) {
+    if (head == nullptr){
+        this->head = nullptr;
+        return;
+    }
     if (head->getNextNode() == nullptr){
         head->setNextNode(head);
     }
@@ -80,7 +84,7 @@ int DoubleLinkedLinearList<T>::getSize() const {
     DNode<T>const * head = getHead();
     int i = 1;
     while( node->getNextNode() != head
-          && node->getNextNode()->getBefore() != node){ // FIXME
+          && node->getNextNode()->getBefore() == node){
         i ++;
         node = node->getNextNode();
     }
@@ -146,7 +150,7 @@ bool DoubleLinkedLinearList<T>::insert(const int index, DNode<T> *node) {
         node->setBefore(indexNode);
         node->setNextNode(indexNode->getNextNode());
         indexNode->getNextNode()->setBefore(node);
-        indexNode->setNextNode(indexNode);
+        indexNode->setNextNode(node);
         return true;
     }
 }
@@ -161,7 +165,11 @@ bool DoubleLinkedLinearList<T>::remove(DNode<T> *node) {
     if (empty()){
         return false;
     }
-    if (node->getBefore()!= nullptr){ // this Node may probably not in this list
+    if (getSize() == 1 && node == getHead()){
+        setHead(nullptr);
+        return true;
+    }
+    if (node->getBefore()== nullptr){ // this Node may probably not in this list
         return false;
     } else{
         if (node->getNextNode() == nullptr){
@@ -169,6 +177,9 @@ bool DoubleLinkedLinearList<T>::remove(DNode<T> *node) {
         }
         node->getBefore()->setNextNode(node->getNextNode());
         node->getNextNode()->setBefore(node->getBefore());
+        if (node == getHead()){
+            this->setHead(node->getNextNode());
+        }
         delete node;
         node = nullptr;
         return true;
@@ -191,7 +202,7 @@ bool DoubleLinkedLinearList<T>::remove(const int index) {
     if (index >= 0){
         // Traversal the list with next
         int i = 0;
-        while (i < index){
+        while (i <= index){
             i ++;
             if (node1 != nullptr){
                 node1 = node1->getNextNode();
@@ -215,6 +226,13 @@ bool DoubleLinkedLinearList<T>::remove(const int index) {
     //delete the target
     target->getBefore()->setNextNode(target->getNextNode());
     target->getNextNode()->setBefore(target->getBefore());
+    if (target == getHead()){
+        if (getSize() == 1){
+            setHead(nullptr);
+        } else{
+            setHead(target->getNextNode());
+        }
+    }
     delete target;
     target = nullptr;
     return false;
@@ -279,6 +297,9 @@ template <class T>
 void DoubleLinkedLinearList<T>::info() const {
     cout << "\n  ---  now print info  ---  \n";
     cout << "  -   size  : " << this->getSize() << endl;
+    if (this->getSize() == 0){
+        return;
+    }
     cout << "  -   head  : " << this->getHead()->getDataNode() << endl;
     cout << "  -   circle: " << this->circleJudge()<< endl;
     cout << "  -   tail  : " << this->getTailNode()->getDataNode() << endl;
