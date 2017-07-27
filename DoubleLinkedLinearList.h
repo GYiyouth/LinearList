@@ -79,9 +79,8 @@ int DoubleLinkedLinearList<T>::getSize() const {
     }
     DNode<T>const * head = getHead();
     int i = 1;
-    while(node!= nullptr
-          && node != head
-          && node->getNextNode()->getBefore() != node){
+    while( node->getNextNode() != head
+          && node->getNextNode()->getBefore() != node){ // FIXME
         i ++;
         node = node->getNextNode();
     }
