@@ -41,6 +41,9 @@ template <class T>
 Node<T > * getCircleNode(Node<T> *head, Node<T> *encounter);
 int test1();
 int DoubleLinkedLinearListExecute();
+void QueueTest();
+
+
 int main() {
 
 
@@ -113,6 +116,6 @@ int main() {
 //    cout << "³É»·²âÊÔ" << endl;
 //    cout << list.circleJudge() << endl;
 //    cout << cirList.circleJudge() << endl;
-    DoubleLinkedLinearListExecute();
+    QueueTest();
     return 0;
 }

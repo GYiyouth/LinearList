@@ -74,7 +74,7 @@ bool DoubleLinkedLinearList<T>::empty() const {
  * @tparam T
  * @return
  */
-//FIXME
+
 template <class T>
 int DoubleLinkedLinearList<T>::getSize() const {
     DNode<T>* node = getHead();
@@ -251,12 +251,13 @@ bool DoubleLinkedLinearList<T>::add(DNode<T> *node) {
     DNode<T>* tail = getTailNode();
     if (tail == nullptr){
         setHead(node);
+        return true;
     }
     node->setNextNode(getHead());
     node->setBefore(tail);
     getHead()->setBefore(node);
     tail->setNextNode(node);
-    return false;
+    return true;
 }
 /**
  * If headNode -> next -> before is not itself, there must be a circle
