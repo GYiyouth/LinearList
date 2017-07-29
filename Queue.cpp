@@ -8,6 +8,7 @@ using namespace std;
 
 void QueueTest(){
     Queue<int> *queue = new Queue<int>();
+    cout << queue->pop() << endl;
     queue->info();
     cout << "\n\npushTest " << endl << endl;
     for (int i = 0; i < 10; ++i) {

@@ -5,9 +5,7 @@
 
 #ifndef LINEARLIST_QUEUE_H
 #define LINEARLIST_QUEUE_H
-
 #include "DoubleLinkedLinearList.h"
-
 using namespace std;
 
 template <class T>
@@ -48,25 +46,6 @@ public:
             return dList->getSize();
         }
     }
-
-//    virtual T& popRef(){
-//        if (isEmpty()){
-//            return (int)NULL;
-//        } else{
-//            DNode<T> head = * dList->getHead();
-//            dList->remove(dList->getHead());
-//            return head.getDataNode();
-//        }
-//    }
-
-    virtual bool pushRef(T& data){
-        if (dList == nullptr) {
-            dList = new DoubleLinkedLinearList<T>();
-        }
-        //TODO
-        T node = *(new T(data));
-        return false;
-    }
     virtual void info(){
         cout << "Queue info" << endl;
         cout << "Size " << size() << endl;
@@ -75,5 +54,4 @@ public:
         this->dList->info();
     }
 };
-
 #endif //LINEARLIST_QUEUE_H
