@@ -42,7 +42,7 @@ Node<T > * getCircleNode(Node<T> *head, Node<T> *encounter);
 int test1();
 int DoubleLinkedLinearListExecute();
 void QueueTest();
-
+void StackTest();
 
 int main() {
 
@@ -116,6 +116,6 @@ int main() {
 //    cout << "³É»·²âÊÔ" << endl;
 //    cout << list.circleJudge() << endl;
 //    cout << cirList.circleJudge() << endl;
-    QueueTest();
+    StackTest();
     return 0;
 }

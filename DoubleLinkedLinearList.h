@@ -21,29 +21,30 @@ class DoubleLinkedLinearList{
 private:
     DNode<T>* head = nullptr;
 public:
-    DNode<T> *getHead() const ;
+    virtual DNode<T> *getHead() const ;
 
-    void setHead(DNode<T> *head) ;
+    virtual void setHead(DNode<T> *head) ;
 
-    bool empty() const ;
+    virtual bool empty() const ;
 
-    int getSize() const ;
+    virtual int getSize() const ;
 
-    DNode<T> *getNode(const int index) const ;
+    virtual DNode<T> *getNode(const int index) const ;
 
-    bool insert(const int index, DNode<T> *node) ;
+    virtual bool insert(const int index, DNode<T> *node) ;
 
-    bool remove(DNode<T> *node) ;
+    virtual bool remove(DNode<T> *node) ;
 
-    bool remove(const int index) ;
+    virtual bool remove(const int index) ;
 
-    bool add(DNode<T> *node) ;
+    virtual bool add(DNode<T> *node) ;
 
-    bool circleJudge() const ;
+    virtual bool circleJudge() const ;
 
-    DNode<T> *getTailNode() const ;
+    virtual DNode<T> *getTailNode() const ;
 
-    void info() const ;
+    virtual void info() const ;
+
 };
 template <class T>
 DNode<T> *DoubleLinkedLinearList<T>::getHead() const {
@@ -102,7 +103,7 @@ DNode<T> *DoubleLinkedLinearList<T>::getNode(int index) const {
     DNode<T>* target = getHead();
 
     if (target == nullptr){
-        return false;
+        return nullptr;
     }
     if (index >= 0){
         // Traversal the list with next
@@ -112,7 +113,7 @@ DNode<T> *DoubleLinkedLinearList<T>::getNode(int index) const {
             if (target != nullptr){
                 target = target->getNextNode();
             } else{
-                return false;
+                return nullptr;
             }
         }// After loop, node1 is the target
     } else{
@@ -123,7 +124,7 @@ DNode<T> *DoubleLinkedLinearList<T>::getNode(int index) const {
             if (target != nullptr){
                 target = target->getBefore();
             } else{
-                return false;
+                return nullptr;
             }
         }
     }
@@ -180,8 +181,6 @@ bool DoubleLinkedLinearList<T>::remove(DNode<T> *node) {
         if (node == getHead()){
             this->setHead(node->getNextNode());
         }
-        delete node;
-        node = nullptr;
         return true;
     }
 }
